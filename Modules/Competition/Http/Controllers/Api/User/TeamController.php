@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Competition\Entities\Team;
-use Modules\User\Entities\User;
 use Modules\Competition\Transformers\TeamResource;
 
 class TeamController extends Controller
@@ -51,16 +50,10 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-
-        return $request->all();
-      //  $user=1;
-       // return $user->teams()->get();
         $team = Team::create($request->all());
-       // return $team->id;
-       //  $user= $request->user_id;
-      //  
-      //  $user->teams()->attach($team->id);
-        //\DB::insert('insert into team_user (user_id, team_id) values (?, ?)', [$request->user_id, $team->id]);
+        // $team->id
+        // $request->user_id
+        DB::insert('insert into team_user (user_id, team_id) values (?, ?)', [$request->user_id, $team->id]);
     
         return new TeamResource($team);
     }

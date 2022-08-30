@@ -17,8 +17,8 @@ class loginAdminSeeder extends Seeder
 
        // \DB::statement('SET FOREIGN_KEY_CHECKS=0');
             DB:: table('admins') ->insert([
-            "email" => "admin@gmail.com",
-            "password" =>'password',
+            "email" => "myadmin@gmail.com",
+            'password' => bcrypt($data['password']),
             'active' => 1,
             'name' => 'Admin System',
             

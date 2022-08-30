@@ -1,20 +1,38 @@
 <?php
 
-namespace Modules\Competition\Http\Controllers;
+namespace Modules\Competition\Http\Controllers\Api\User;
 
+use Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Competition\Entities\Team;
+use Modules\User\Entities\User;
+use Modules\Competition\Transformers\TeamResource;
 
-class CompetitionController extends Controller
+class TeamController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('competition::index');
+     //  return  Auth::user();
+        //$teams = Team::with('competitions')->Auth()->latest()->get();
+        $teams = Team::all();
+        //  return   $competitions->load('categories');
+         // return response()->json($competition);
+         
+          return TeamResource::collection($teams);
+  
     }
 
     /**
@@ -23,7 +41,7 @@ class CompetitionController extends Controller
      */
     public function create()
     {
-        return view('competition::create');
+        return view('Team::create');
     }
 
     /**
@@ -33,7 +51,16 @@ class CompetitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //  $user=1;
+       // return $user->teams()->get();
+        $team = Team::create($request->all());
+       // return $team->id;
+       //  $user= $request->user_id;
+      //  
+        $user->teams()->attach($team->id);
+        DB::insert('insert into team_user (user_id, team_id) values (?, ?)', [$request->user_id, $team->id]);
+    
+        return new TeamResource($team);
     }
 
     /**
@@ -43,7 +70,7 @@ class CompetitionController extends Controller
      */
     public function show($id)
     {
-        return view('competition::show');
+        return view('Team::show');
     }
 
     /**
@@ -53,7 +80,7 @@ class CompetitionController extends Controller
      */
     public function edit($id)
     {
-        return view('competition::edit');
+        return view('Team::edit');
     }
 
     /**

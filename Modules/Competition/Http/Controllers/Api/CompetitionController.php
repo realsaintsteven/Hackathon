@@ -1,30 +1,38 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Competition\Http\Controllers\Api;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Competition\Entities\Competition;
+use Modules\Competition\Entities\Category;
+use Modules\Competition\Requests\UpdateCompetitionRequest;
 
-class AdminController extends Controller
+use Modules\Competition\Transformers\CompetitionResource;
+
+
+class CompetitionController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('admin::index');
+        $all_competition = Category::with('competitions')->latest()->get();
+
+        //  return   $competitions->load('categories');
+         // return response()->json($competition);
+          return CompetitionResource::collection($all_competition);
+  
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,11 +49,11 @@ class AdminController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(Competition $all_competition)
     {
-        return view('admin::show');
+         
+       return new CompetitionResource($all_competition);
     }
-
     /**
      * Show the form for editing the specified resource.
      * @param int $id
@@ -53,7 +61,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        return view('competition::edit');
     }
 
     /**

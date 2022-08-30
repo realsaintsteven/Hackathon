@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('competition')->group(function() {
-    Route::get('/', 'CompetitionController@index');
-});
+// Route::prefix('competition')->group(function() {
+//     Route::get('/', 'CompetitionController@index');
+// });

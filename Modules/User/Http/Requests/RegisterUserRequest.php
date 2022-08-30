@@ -17,7 +17,7 @@ class RegisterUserRequest extends FormRequest
           'firstname' => 'required|string',
           'lastname' => 'required|string',
           // 'phone' => 'required|unique:users,phone|phone:auto,mobile',
-          'phone' => 'required||unique:users,phone|regex:/^(?:[+0])?[0-9]{10,13}$/',
+        //  'phone' => 'required||unique:users,phone|regex:/^(?:[+0])?[0-9]{10,13}$/',
           'email' => 'required|email|unique:users,email',
           'password' => 'required|string|min:8|confirmed',
           'accept' => 'required|boolean',

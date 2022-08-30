@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Auth\Events\Registered;
-use Propaganistas\LaravelPhone\PhoneNumber;
+// use Propaganistas\LaravelPhone\PhoneNumber;
 
 use Modules\User\Entities\User;
 use Modules\User\Transformers\UserResource;

@@ -67,8 +67,8 @@ class AccountController extends Controller
             return response(['errors' => $validator->errors()], 400);
         }
 
-        $response = \Http::withToken($user->gb_token)->acceptJson()
-            ->patch(env('GB_API_BASE_URL').'/account/password', $request->all());
+        // $response = \Http::withToken($user->gb_token)->acceptJson()
+        //     ->patch(env('GB_API_BASE_URL').'/account/password', $request->all());
         
         if(!$response->successful()) {
             return response()->json($response->json(), $response->status());
@@ -96,9 +96,9 @@ class AccountController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        $response = \Http::acceptJson()
-            ->withHeaders(['Merchant-Apikey' => env('GB_MERCHANT_API_KEY')])
-            ->post(env('GB_API_BASE_URL').'/auth/forgot-password-token', $request->all());
+        // $response = \Http::acceptJson()
+        //     ->withHeaders(['Merchant-Apikey' => env('GB_MERCHANT_API_KEY')])
+        //     ->post(env('GB_API_BASE_URL').'/auth/forgot-password-token', $request->all());
 
         if(!$response->successful()) {
             return response()->json($response->json(), $response->status());
@@ -118,9 +118,9 @@ class AccountController extends Controller
 
     public function resetPassword(Request $request)
     {
-        $response = \Http::acceptJson()
-            ->withHeaders(['Merchant-Apikey' => env('GB_MERCHANT_API_KEY')])
-            ->post(env('GB_API_BASE_URL').'/auth/reset-password', $request->all());
+        // $response = \Http::acceptJson()
+        //     ->withHeaders(['Merchant-Apikey' => env('GB_MERCHANT_API_KEY')])
+        //     ->post(env('GB_API_BASE_URL').'/auth/reset-password', $request->all());
 
         if(!$response->successful()) {
             return response()->json($response->json(), $response->status());

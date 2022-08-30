@@ -15,18 +15,19 @@ return new class extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('competition_type_id');
             $table->string('name');
             $table->string('short_description');
             $table->string('description');
             $table->date('start_at');
             $table->date('end_at');
+            $table->foreignId('category_id');
             $table->json('max_team_number')->nullable();
             $table->string('award')->nullable();
+            $table->string('image', 50)->nullable();
             $table->timestamps();
 
             
-            $table->foreign('competition_type_id')->references('id')->on('competition_types');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

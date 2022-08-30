@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Propaganistas\LaravelPhone\PhoneNumber;
 
 use Modules\User\Entities\User;
+use Modules\Competition\Entities\Team;
 use Modules\User\Transformers\UserResource;
 
 class LoginController extends Controller
@@ -49,17 +50,23 @@ class LoginController extends Controller
         return $this->respondWithToken(auth()->refresh());
     }
 
-    /**
+    /** 
      * Authentication response
      */
     public function respondWithToken($token)
     {
+
+        $payload = auth()->user()->load(
+           'teamUsers'
+        )->toArray();
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL(),
             'guard' => 'user',
-            'user' => new UserResource(auth()->user()),
+            // 'user' => new UserResource(auth()->user()),
+            'user' => new UserResource($payload),
         ]);
     }
 }

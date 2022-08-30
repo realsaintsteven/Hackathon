@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 use Modules\User\Entities\User;
-use Modules\Reservation\Entities\Reservation;
-use Modules\Partner\Entities\Franchisee;
-use Modules\Partner\Entities\Installer;
-use Modules\Partner\Entities\Institute;
-use Modules\Partner\Entities\Insurance;
+
 
 class DashboardController extends Controller
 {

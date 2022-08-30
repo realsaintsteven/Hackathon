@@ -19,7 +19,7 @@ class loginAdminSeeder extends Seeder
             DB:: table('admins') ->insert([
             "email" => "admin@gmail.com",
             "password" =>'password',
-            'uid' => 1,
+            'active' => 1,
             'name' => 'Admin System',
             
            

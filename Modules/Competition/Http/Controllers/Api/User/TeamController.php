@@ -51,6 +51,8 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+
+        return $request->all();
       //  $user=1;
        // return $user->teams()->get();
         $team = Team::create($request->all());

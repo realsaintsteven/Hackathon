@@ -57,7 +57,7 @@ class TeamController extends Controller
        // return $team->id;
        //  $user= $request->user_id;
       //  
-        $user->teams()->attach($team->id);
+      //  $user->teams()->attach($team->id);
         DB::insert('insert into team_user (user_id, team_id) values (?, ?)', [$request->user_id, $team->id]);
     
         return new TeamResource($team);
